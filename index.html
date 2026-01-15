@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>DARKBIAX WHEEL</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body {
+  background: radial-gradient(circle at top, #0f2027, #000);
+  font-family: Arial, sans-serif;
+  color: #00ffcc;
+  text-align: center;
+  padding: 20px;
+}
+h1 { letter-spacing: 3px; }
+#wheel {
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  border: 6px solid #00ffcc;
+  margin: 20px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  background: #000;
+}
+button {
+  background: #00ffcc;
+  color: #000;
+  border: none;
+  padding: 15px 30px;
+  font-size: 18px;
+  border-radius: 30px;
+  cursor: pointer;
+}
+button:disabled {
+  opacity: 0.4;
+}
+#result {
+  margin-top: 20px;
+  font-size: 22px;
+}
+footer {
+  margin-top: 40px;
+  font-size: 12px;
+  color: #aaa;
+}
+</style>
+</head>
+
+<body>
+
+<h1>DARKBIAX WHEEL</h1>
+<p>Sorteo digital oficial</p>
+
+<div id="wheel">🎡</div>
+
+<button id="spinBtn" onclick="spin()">GIRAR</button>
+
+<div id="result"></div>
+
+<footer>
+Sorteo promocional • Resultado grabado • DARKBIAX
+</footer>
+
+<script>
+let used = false;
+
+function spin() {
+  if (used) return;
+  used = true;
+  document.getElementById("spinBtn").disabled = true;
+
+  let spins = 20;
+  let count = 0;
+
+  let interval = setInterval(() => {
+    let num = Math.floor(Math.random() * 100) + 1;
+    document.getElementById("wheel").innerText = num;
+    count++;
+    if (count >= spins) {
+      clearInterval(interval);
+      let final = Math.floor(Math.random() * 100) + 1;
+      let time = new Date().toLocaleString();
+      document.getElementById("wheel").innerText = final;
+      document.getElementById("result").innerHTML =
+        "🎉 NÚMERO GANADOR: <b>" + final + "</b><br>" +
+        "⏰ " + time;
+    }
+  }, 100);
+}
+</script>
+
+</body>
+</html>
